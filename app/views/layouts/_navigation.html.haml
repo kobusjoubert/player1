@@ -8,14 +8,16 @@
   = link_to "Player1", root_path, class: "navbar-brand"
 .navbar-collapse.collapse
   %ul.nav.navbar-nav
-    %li.active
+    %li{ class: "#{active_class(root_path)}" }
       = link_to "Home", root_path
   %ul.nav.navbar-nav.navbar-right
     - if user_signed_in?
+      %li{ class: "#{active_class(edit_user_registration_path)}" }
+        = link_to "Account", edit_user_registration_path
       %li
         = link_to "Sign out", destroy_user_session_path, method: :delete
     - else
-      %li
-        = link_to "Sign in", new_user_session_path
-      %li
+      %li{ class: "#{active_class(new_user_registration_path)}" }
         = link_to "Register", new_user_registration_path
+      %li{ class: "#{active_class(new_user_session_path)}" }
+        = link_to "Sign in", new_user_session_path
