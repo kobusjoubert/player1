@@ -14,7 +14,7 @@
             = image_tag artist["picture_url"], class: "img-circle img-small"
             %span
               = artist["name"].truncate(30)
-      - if !params[:similar_artists]
+      - if !params[:similar_artists] && @similar_artists.length > 5
         = link_to "More similar artitsts", artist_path + "?similar_artists=all"
 .row
   .col-sm-12
