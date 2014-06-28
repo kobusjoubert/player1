@@ -1,21 +1,19 @@
-%h1 Listing artists
-
-%table
-  %tr
-    %th Name
-    %th About
-    %th
-    %th
-    %th
-
-  - @artists.each do |artist|
-    %tr
-      %td= artist.name
-      %td= artist.about
-      %td= link_to 'Show', artist
-      %td= link_to 'Edit', edit_artist_path(artist)
-      %td= link_to 'Destroy', artist, :method => :delete, :data => { :confirm => 'Are you sure?' }
-
-%br
-
-= link_to 'New Artist', new_artist_path
+%h1 Artists
+%table.table.table-hover
+  %tbody
+    - @artists.each do |artist|
+      %tr
+        %td
+          = link_to artist do
+            = artist.name
+            = artist.about
+        - if user_signed_in?
+          %td
+            .pull-right
+              = link_to edit_artist_path(artist), class: "btn btn-xs btn-default" do
+                %i.glyphicon.glyphicon-pencil
+              = link_to artist, method: :delete, :data => { confirm: 'Are you sure?' }, class: "btn btn-xs btn-danger" do
+                %i.glyphicon.glyphicon-trash
+= link_to new_artist_path, class: "btn btn-primary" do
+  %i.glyphicon.glyphicon-plus
+  Artist

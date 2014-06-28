@@ -1,16 +1,11 @@
 = form_for @artist do |f|
-  - if @artist.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@artist.errors.count, "error")} prohibited this artist from being saved:"
-      %ul
-        - @artist.errors.full_messages.each do |msg|
-          %li= msg
-
-  .field
+  = render "layouts/errors", resource: @artist
+  .form-group
     = f.label :name
-    = f.text_field :name
-  .field
+    = f.text_field :name, class: "form-control"
+  .form-group
     = f.label :about
-    = f.text_area :about
+    = f.text_area :about, class: "form-control", rows: 4, placeholder: "Some info about the artist"
   .actions
-    = f.submit 'Save'
+    = f.submit 'Save', class: "btn btn-primary"
+    = link_to 'Back', artists_path, class: "btn btn-default pull-right"

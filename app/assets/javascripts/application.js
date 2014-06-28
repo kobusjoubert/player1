@@ -26,4 +26,14 @@
 //= require bootstrap/modal
 // require bootstrap/tooltip
 // require bootstrap/popover
+//= require twitter/bootstrap/rails/confirm
 //= require_tree .
+
+$.fn.twitter_bootstrap_confirmbox.defaults = {
+    fade: true,
+    title: "Player1",
+    cancel: "Cancel",
+    cancel_class: "btn cancel",
+    proceed: "OK",
+    proceed_class: "btn proceed btn-primary"
+};

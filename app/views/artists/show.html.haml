@@ -1,12 +1,6 @@
-%p#notice= notice
-
-%p
-  %b Name:
-  = @artist.name
-%p
-  %b About:
-  = @artist.about
-
-= link_to 'Edit', edit_artist_path(@artist)
-\|
-= link_to 'Back', artists_path
+.row
+  .col-sm-12
+    %h1= @artist.name
+    %p= @artist.about
+%h3 Similar Artists
+= link_to 'Back', artists_path, class: "btn btn-default pull-right"

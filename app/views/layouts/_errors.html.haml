@@ -1,0 +1,7 @@
+- if resource.errors.any?
+  .alert.alert-danger
+    %button.close{ type: "button", aria: { hidden: "true" }, data: { dismiss: "alert" } }
+      &times;
+    - resource.errors.full_messages.each do |msg|
+      = msg
+      %br/
