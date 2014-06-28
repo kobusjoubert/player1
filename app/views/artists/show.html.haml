@@ -1,8 +1,8 @@
 .row
-  .col-sm-4
+  .col-sm-3
     %h1
-      = image_tag @artist.picture.url(:extra_large), alt: "#{@artist.name}", title: "#{@artist.name}"
-  .col-sm-8
+      = image_tag @artist.picture.url(:extra_large), alt: "#{@artist.name}", title: "#{@artist.name}", class: "img-rounded"
+  .col-sm-9
     %h2= @artist.name
     %p= @artist.about
 %h3 Similar Artists
