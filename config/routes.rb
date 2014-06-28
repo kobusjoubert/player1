@@ -1,17 +1,17 @@
 Rails.application.routes.draw do
-  resources :tracks
-
-  resources :album_artists
-
-  resources :albums
-
   root 'public#index'
 
   get 'public/index'
 
-  devise_for :users
+  devise_for :users, path: 'users', path_names: { sign_in: 'login', sign_out: 'logout', sign_up: 'register' }
 
   resources :artists
+
+  resources :album_artists
+
+  resources :albums do
+    resources :tracks, except: :show
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
