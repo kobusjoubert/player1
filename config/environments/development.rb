@@ -41,4 +41,7 @@ Rails.application.configure do
   # Paperclip
   # Run command 'which convert' to get this path.
   Paperclip.options[:command_path] = "/usr/local/bin/convert"
+
+  # Letter opener
+  config.action_mailer.delivery_method = :letter_opener
 end
