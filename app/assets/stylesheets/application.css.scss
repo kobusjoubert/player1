@@ -13,8 +13,10 @@
  * require_tree .
  *= require_self
  */
+
 //$gray: #ddd;
 //$icon-font-path: "../fonts/";
+
 @import "bootstrap";
 
 @font-face {
@@ -25,3 +27,18 @@
 
 body { padding-top: 60px; }
 
+// Make all images resonsive by default
+img {
+  @include img-responsive(inline-block);
+}
+
+// Removes outline around focused anchor tags.
+a:focus {
+  outline: none;
+}
+
+// Centers a block.
+.pull-center {
+  text-align: center;
+  @include center-block();
+}
