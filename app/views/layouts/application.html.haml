@@ -10,7 +10,7 @@
     = javascript_include_tag :application, "data-turbolinks-track" => true
     = csrf_meta_tags
     = yield(:head)
-  %body
+  %body{ class: "#{body_classes}" }
     %header.navbar.navbar-default.navbar-fixed-top{ role: "navigation" }
       %nav.container
         = render "layouts/navigation"

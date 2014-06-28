@@ -2,8 +2,21 @@
   .col-sm-3
     %h1
       = image_tag @artist.picture.url(:extra_large), alt: "#{@artist.name}", title: "#{@artist.name}", class: "img-rounded"
-  .col-sm-9
+  .col-sm-9.col-md-5
     %h2= @artist.name
     %p= @artist.about
-%h3 Similar Artists
-= link_to 'Back', artists_path, class: "btn btn-default pull-right"
+  .col-sm-12.col-md-4
+    %h3 Similar Artists
+    - if @similar_artists
+      %ul.list-unstyled.list-similar-artists
+        - @similar_artists.first(@limit_artists).each do |artist|
+          %li{ title: "#{artist['name']}", class: "tooltips", data: { toggle: "tooltip" } }
+            = image_tag artist["picture_url"], class: "img-circle img-small"
+            %span
+              = artist["name"].truncate(30)
+      - if !params[:similar_artists]
+        = link_to "More similar artitsts", artist_path + "?similar_artists=all"
+.row
+  .col-sm-12
+    .actions
+      = link_to 'Back', artists_path, class: "btn btn-default pull-right"

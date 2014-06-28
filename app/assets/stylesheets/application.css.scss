@@ -25,7 +25,10 @@
   src: url(asset_path('glyphicons-halflings-regular.eot?#iefix')) format('embedded-opentype'), url(asset_path('glyphicons-halflings-regular.woff')) format('woff'), url(asset_path('glyphicons-halflings-regular.ttf')) format('truetype'), url(asset_path('glyphicons-halflings-regular.svg#glyphicons_halflingsregular')) format('svg');
 }
 
-body { padding-top: 60px; }
+body { 
+  padding-top: 60px;
+  margin-bottom: 50px;
+}
 
 // Make all images resonsive by default
 img {
@@ -41,4 +44,22 @@ a:focus {
 .pull-center {
   text-align: center;
   @include center-block();
+}
+
+// Thumbnails
+.img-small {
+  width: 34px;
+  height: 34px;
+}
+
+.img-extra-large {
+  width: 250px;
+  height: 250px;
+}
+
+// Style
+.list-similar-artists {
+  li {
+    margin-bottom: 3px;
+  }
 }

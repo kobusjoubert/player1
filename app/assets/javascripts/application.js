@@ -24,7 +24,7 @@
 //= require bootstrap/transition
 // require bootstrap/scrollspy
 //= require bootstrap/modal
-// require bootstrap/tooltip
+//= require bootstrap/tooltip
 // require bootstrap/popover
 //= require twitter/bootstrap/rails/confirm
 //= require_tree .
@@ -37,3 +37,9 @@ $.fn.twitter_bootstrap_confirmbox.defaults = {
     proceed: "OK",
     proceed_class: "btn proceed btn-primary"
 };
+
+$(document).on("ready page:change", function() {
+  var side = $("body.mobile").length ? "top" : "left";
+
+  $(".tooltips").tooltip({ placement: side });
+});

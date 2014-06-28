@@ -10,6 +10,8 @@ class ArtistsController < ApplicationController
   # GET /artists/1
   # GET /artists/1.json
   def show
+    @similar_artists = get_similar_artists(@artist.name)
+    @limit_artists = params[:similar_artists] ? 100 : 5
   end
 
   # GET /artists/new
@@ -70,5 +72,33 @@ class ArtistsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def artist_params
       params.require(:artist).permit(:name, :about, :picture)
+    end
+
+    # Similar artists
+    def get_similar_artists(artist)
+      require "net/http"
+
+      result = []
+      api_key = "ee548e80b1802f0a8098e75f9b804361"
+      uri = URI.parse("http://ws.audioscrobbler.com/2.0/?method=artist.getsimilar&artist=#{CGI.escape artist}&api_key=#{api_key}&format=json")
+      response = Net::HTTP.get(uri)
+      # response.code
+      # response.body
+      json = JSON.parse(response).values
+
+      if json.count > 0
+        artists = json[0]["artist"]
+
+        artists.each do |artist|
+          data = {
+            "name" => artist["name"],
+            "picture_url" => artist["image"][0]["#text"]
+          }
+
+          result << data
+        end
+      end
+
+      result
     end
 end
