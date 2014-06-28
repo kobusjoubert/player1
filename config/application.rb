@@ -39,7 +39,6 @@ module Player1
 
     # Add fonts and theme to the assets pipeline.
     config.assets.paths << Rails.root.join("app", "assets", "fonts")
-    config.assets.paths << Rails.root.join("vendor", "libraries")
 
     # Heroku
 
