@@ -84,18 +84,21 @@ class ArtistsController < ApplicationController
       response = Net::HTTP.get(uri)
       # response.code
       # response.body
+
       json = JSON.parse(response).values
 
       if json.count > 0
         artists = json[0]["artist"]
 
-        artists.each do |artist|
-          data = {
-            "name" => artist["name"],
-            "picture_url" => artist["image"][0]["#text"]
-          }
+        if artists.instance_of?(Array)
+          artists.each do |artist|
+            data = {
+              "name" => artist["name"],
+              "picture_url" => artist["image"][0]["#text"]
+            }
 
-          result << data
+            result << data
+          end
         end
       end
 
