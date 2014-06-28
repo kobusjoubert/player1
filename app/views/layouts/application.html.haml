@@ -1,6 +1,4 @@
--# app/views/layouts/application.html.haml
--# Jam in a flash[:notice] so that we can see the flash rendering in effect
-- flash[:notice] = "This is a test"
+/ - flash[:notice] = "This is a test"
 !!!
 %html
   %head
@@ -22,6 +20,6 @@
         .content
           .row
             .span12
-              = render "ayouts/messages"
+              = render "layouts/messages"
               = yield
           %footer
