@@ -1,9 +1,27 @@
+-# app/views/layouts/application.html.haml
+-# Jam in a flash[:notice] so that we can see the flash rendering in effect
+- flash[:notice] = "This is a test"
 !!!
 %html
   %head
-    %title Player1
-    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
-    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    %meta{ charset: "utf-8" }
+    %meta{ name: "viewport", content: "width=device-width, initial-scale=1, maximum-scale=1" }
+    %title= content_for?(:title) ? yield(:title) : "Player1"
+    %meta{ content: content_for?(:description) ? yield(:description) : "Player1", :name => "description" }
+    %meta{ content: "", :name => "author" }
+    = stylesheet_link_tag :application, media: "all", "data-turbolinks-track" => true
+    = javascript_include_tag :application, "data-turbolinks-track" => true
     = csrf_meta_tags
+    = yield(:head)
   %body
-    = yield
+    %header.navbar.navbar-inverse.navbar-fixed-top
+      %nav.container
+        = render "layouts/navigation"
+    #main{ role: "main"}
+      .container
+        .content
+          .row
+            .span12
+              = render "ayouts/messages"
+              = yield
+          %footer
