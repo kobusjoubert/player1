@@ -40,5 +40,13 @@ module Player1
     # Add fonts and theme to the assets pipeline.
     config.assets.paths << Rails.root.join("app", "assets", "fonts")
     config.assets.paths << Rails.root.join("vendor", "libraries")
+
+    # Heroku
+
+    # Amazon S3 & Paperclip
+    config.paperclip_defaults = {
+      storage: :s3,
+      s3_credentials: "#{Rails.root}/config/s3.yml",
+    }
   end
 end
