@@ -39,7 +39,12 @@ $.fn.twitter_bootstrap_confirmbox.defaults = {
 };
 
 $(document).on("ready page:change", function() {
+  // Tooltips on top when mobile device, left otherwise.
   var side = $("body.mobile").length ? "top" : "left";
-
   $(".tooltips").tooltip({ placement: side });
+
+  // Clicking on image should trigger form file field.
+  $(".img-artist-picture").click(function() {
+    $("#artist_picture").click();
+  });
 });

@@ -1,7 +1,7 @@
 .row
   .col-sm-3
     %h1
-      = image_tag @artist.picture.url(:extra_large), alt: "#{@artist.name}", title: "#{@artist.name}", class: "img-rounded"
+      = image_tag @artist.picture.url(:extra_large), alt: "#{@artist.name}", title: "#{@artist.name}", class: "img-circle"
   .col-sm-9.col-md-5
     %h2= @artist.name
     %p= @artist.about

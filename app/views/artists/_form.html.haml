@@ -1,16 +1,18 @@
 = form_for @artist, html: { multipart: true } do |f|
   = render "layouts/errors", resource: @artist
+  %h1
+    = image_tag @artist.picture.url(:extra_large), alt: "#{@artist.name}", title: "#{@artist.name}", class: "img-circle pull-center img-artist-picture"
+  .form-group
+    = f.label :picture
+    = f.file_field :picture
+    %p.help-block
+      Add a picture of the artist
   .form-group
     = f.label :name
     = f.text_field :name, class: "form-control"
   .form-group
     = f.label :about
     = f.text_area :about, class: "form-control", rows: 4, placeholder: "Some info about the artist"
-  .form-group
-    = f.label :picture
-    = f.file_field :picture
-    %p.help-block
-      Add a picture of the artist
   .actions
     = f.submit 'Save', class: "btn btn-primary"
     = link_to 'Back', artists_path, class: "btn btn-default pull-right"
