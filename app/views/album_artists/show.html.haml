@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%p
+  %b Album:
+  = @album_artist.album
+%p
+  %b Artist:
+  = @album_artist.artist
+
+= link_to 'Edit', edit_album_artist_path(@album_artist)
+\|
+= link_to 'Back', album_artists_path
