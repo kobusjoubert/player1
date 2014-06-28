@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-
+ruby '2.1.1'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.1'
@@ -38,3 +38,40 @@ gem 'spring',        group: :development
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
+# Server
+gem 'rake', '10.3.2'
+gem 'passenger'
+
+# Design
+gem 'haml-rails'
+gem 'bootstrap-sass'
+gem 'twitter-bootstrap-rails-confirm', github: 'bluerail/twitter-bootstrap-rails-confirm', branch: 'bootstrap3'
+gem 'jquery-ui-rails'
+gem 'jquery-turbolinks'
+gem 'kaminari'
+
+# Authentication
+gem 'devise'
+
+# Amazon S3
+gem 'paperclip'
+gem 'aws-sdk'
+gem 'aws-s3'
+
+group :development, :test do
+  gem 'rspec-rails', '~> 3.0.0'
+end
+
+group :development do
+  gem 'erb2haml'
+  gem 'better_errors'
+  gem 'binding_of_caller'
+  gem 'debugger'
+  gem 'debugger-completion'
+  gem 'letter_opener'
+  gem 'activerecord-deprecated_finders', github: 'rails/activerecord-deprecated_finders'
+end
+
+group :production do
+  gem 'rails_12factor'
+end
