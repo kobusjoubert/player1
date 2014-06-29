@@ -1,5 +1,5 @@
 class Track < ActiveRecord::Base
   belongs_to :album
 
-  validates_presense_of :name
+  validates_presence_of :name
 end

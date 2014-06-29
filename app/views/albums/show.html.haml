@@ -1,12 +1,13 @@
 .row
-  .col-sm-3
+  .col-sm-4
     %h1
-      = image_tag @album.cover.url(:extra_large), alt: "#{@album.title}", title: "#{@album.title}", class: "img-rounded"
-  .col-sm-9.col-md-5
+      = image_tag @album.cover.url(:mega), alt: "#{@album.title}", title: "#{@album.title}", class: "img-rounded"
+  .col-sm-8.col-md-3
     %h2= @album.title
     %p= @album.description
-  .col-sm-12.col-md-4
+  .col-sm-12.col-md-5
     %h3 Tracks
+    = render partial: "tracks/index", locals: { album: @album }
     / - if @album.tracks
     /   %ul.list-unstyled.list-album-tracks
     /     - @album.tracks.each do |track|

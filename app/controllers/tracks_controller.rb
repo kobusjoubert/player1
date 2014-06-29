@@ -1,12 +1,13 @@
 class TracksController < ApplicationController
   before_action :set_track, only: [:show, :edit, :update, :destroy]
-  before_action :set_ablum
+  # before_action :set_ablum, only: [:destroy]
 
   # GET /albums/1/tracks
   # GET /albums/1/tracks.json
   def index
     # @tracks = Track.all
     @tracks = @album.tracks
+    asd
   end
 
   # GET /albums/1/tracks/1
@@ -57,8 +58,9 @@ class TracksController < ApplicationController
   # DELETE /albums/1/tracks/1.json
   def destroy
     @track.destroy
+
     respond_to do |format|
-      format.html { redirect_to tracks_url, notice: 'Track was successfully destroyed.' }
+      format.html { redirect_to album_url(@track.album), notice: 'Track was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
