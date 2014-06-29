@@ -6,6 +6,7 @@ class TracksController < ApplicationController
   # GET /albums/1/tracks.json
   def index
     respond_to do |format|
+      format.html { render partial: "index", locals: { album: @album } }
       format.json { render json: @album.tracks.to_json }
       format.xml { render xml: @album.tracks.to_xml }
     end

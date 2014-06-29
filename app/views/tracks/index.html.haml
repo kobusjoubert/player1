@@ -1,0 +1,18 @@
+%table.table.table-hover
+  - if album.tracks.blank?
+    %p No tracks yet
+  - if !album.tracks.blank?
+    %tbody
+      - album.tracks.each do |track|
+        %tr.tooltips{ title: "#{track.name}", data: { toggle: "tooltip" } }
+          %td
+            %strong= track.name.truncate(30)
+            - if track.duration
+              (#{distance_of_time_in_words(track.duration)})
+          - if user_signed_in?
+            %td
+              .pull-right
+                = link_to edit_album_track_path(album, track), class: "btn btn-xs btn-default" do
+                  %i.glyphicon.glyphicon-pencil
+                = link_to album_track_path(album, track), method: :delete, :data => { confirm: 'Are you sure?' }, class: "btn btn-xs btn-danger" do
+                  %i.glyphicon.glyphicon-trash
