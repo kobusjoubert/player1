@@ -19,6 +19,12 @@ class ArtistsController < ApplicationController
   def show
     @similar_artists = get_similar_artists(@artist.name)
     @limit_artists = params[:similar_artists] ? 100 : 5
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @artist.to_json }
+      format.xml { render xml: @artist.to_xml }
+    end
   end
 
   # GET /artists/new
