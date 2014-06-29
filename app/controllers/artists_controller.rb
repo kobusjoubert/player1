@@ -46,9 +46,11 @@ class ArtistsController < ApplicationController
       if @artist.save
         format.html { redirect_to @artist, notice: 'Artist was successfully created.' }
         format.json { render :show, status: :created, location: @artist }
+        format.xml { render xml: @artist, status: :created }
       else
         format.html { render :new }
         format.json { render json: @artist.errors, status: :unprocessable_entity }
+        format.xml { render xml: @artist.errors, status: :unprocessable_entity }
       end
     end
   end
