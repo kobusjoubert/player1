@@ -66,9 +66,11 @@ class AlbumsController < ApplicationController
       if @album.update(album_params)
         format.html { redirect_to @album, notice: 'Album was successfully updated.' }
         format.json { render :show, status: :ok, location: @album }
+        format.xml { render xml: @album, status: :ok }
       else
         format.html { render :edit }
         format.json { render json: @album.errors, status: :unprocessable_entity }
+        format.xml { render xml: @album.errors, status: :unprocessable_entity }
       end
     end
   end
