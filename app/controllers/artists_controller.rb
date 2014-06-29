@@ -6,6 +6,12 @@ class ArtistsController < ApplicationController
   # GET /artists.json
   def index
     @artists = Artist.page(params[:page])
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @artists.to_json }
+      format.xml { render xml: @artists.to_xml }
+    end
   end
 
   # GET /artists/1
