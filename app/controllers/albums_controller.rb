@@ -11,6 +11,7 @@ class AlbumsController < ApplicationController
   # GET /albums/1
   # GET /albums/1.json
   def show
+    @track = Track.new if user_signed_in?
   end
 
   # GET /albums/new

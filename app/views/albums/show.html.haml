@@ -8,6 +8,8 @@
   .col-sm-12.col-md-5
     %h3 Tracks
     = render partial: "tracks/index", locals: { album: @album }
+    - if user_signed_in?
+      = render partial: "tracks/form", locals: { album: @album }
 .row
   .col-sm-12
     .actions

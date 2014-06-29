@@ -1,16 +1,10 @@
-= form_for @track do |f|
-  - if @track.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@track.errors.count, "error")} prohibited this track from being saved:"
-      %ul
-        - @track.errors.full_messages.each do |msg|
-          %li= msg
-
-  .field
-    = f.label :name
-    = f.text_field :name
-  .field
-    = f.label :duration
-    = f.number_field :duration
-  .actions
-    = f.submit 'Save'
+= form_for [@album, @track], html: { class: "form-inline" } do |f|
+  = render "layouts/errors", resource: @track
+  .form-group
+    = f.label :name, class: "sr-only"
+    = f.text_field :name, class: "form-control input-sm", placeholder: "name"
+  .form-group
+    = f.label :duration, class: "sr-only"
+    = f.text_field :duration, class: "form-control input-sm", placeholder: "duration (seconds)"
+  .form-group.actions
+    = f.submit "Add", class: "btn btn-sm btn-primary"
