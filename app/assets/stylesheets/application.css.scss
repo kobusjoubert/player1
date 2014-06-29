@@ -84,3 +84,7 @@ a:focus {
     }
   }
 }
+
+form select[multiple="multiple"] {
+  height: 150px;
+}

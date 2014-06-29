@@ -22,6 +22,10 @@
   / .form-group
   /   = f.label :genre
   /   = f.number_field :genre, class: "form-control"
+  .form-group
+    = f.label :artists
+    = f.select :artists, options_from_collection_for_select(Artist.all, :id, :name, album_artist_id(@album)), {}, { class: "form-control", multiple: "multiple" }
+    %p.help-block You need to select at least one artist
   .actions
     = f.submit 'Save', class: "btn btn-primary"
     = link_to 'Back', albums_path, class: "btn btn-default pull-right"

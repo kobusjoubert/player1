@@ -26,11 +26,8 @@ class AlbumsController < ApplicationController
   # POST /albums.json
   def create
     @album = Album.new(album_params)
-
-    if params[:search_online]
-      cover_url = get_album_cover(@album.title)
-      @album.cover_from_url(cover_url) if !cover_url.blank?
-    end
+    album_artists
+    album_cover if params[:search_online]
 
     respond_to do |format|
       if @album.save
@@ -46,6 +43,9 @@ class AlbumsController < ApplicationController
   # PATCH/PUT /albums/1
   # PATCH/PUT /albums/1.json
   def update
+    album_artists
+    album_cover if params[:search_online]
+
     respond_to do |format|
       if @album.update(album_params)
         format.html { redirect_to @album, notice: 'Album was successfully updated.' }
@@ -75,7 +75,36 @@ class AlbumsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def album_params
-      params.require(:album).permit(:title, :description, :genre, :cover)
+      params.require(:album).permit(:title, :description, :genre, :cover, :artists)
+    end
+
+    # There need to be at least one artist.
+    def album_artists
+      artist_ids = params[:album][:artists]
+      artist_ids.shift
+
+      if artist_ids.length > 0
+        # Remove all artists linked to this album first.
+        album_artists = AlbumArtist.where(album_id: @album)
+
+        album_artists.each do |album_artist|
+          album_artist.destroy
+        end
+
+        # Add all artists from list.
+        artist_ids.each do |artist_id|
+          album_artist = AlbumArtist.new(album: @album, artist_id: artist_id)
+          album_artist.save
+        end
+      else
+        # TODO: Not sure why this isn't displaying the error.
+        @album.errors.add(:artists, "You need to select at least one artist.")
+      end
+    end
+
+    def album_cover
+      cover_url = get_album_cover(@album.title)
+      @album.cover_from_url(cover_url) if !cover_url.blank?
     end
 
     # Album cover
