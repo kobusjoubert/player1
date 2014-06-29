@@ -5,6 +5,12 @@ class PublicController < ApplicationController
   # GET /albums.json
   def index
     @albums = Album.page(params[:page]).per(10).order(created_at: :desc)
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @albums.to_json }
+      format.xml { render xml: @albums.to_xml }
+    end
   end
 
   # GET /search
