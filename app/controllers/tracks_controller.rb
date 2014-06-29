@@ -1,11 +1,15 @@
 class TracksController < ApplicationController
   before_action :set_track, only: [:show, :edit, :update, :destroy]
-  before_action :set_album, only: [:edit]
+  before_action :set_album, only: [:index, :edit]
 
-  # # GET /albums/1/tracks
-  # # GET /albums/1/tracks.json
-  # def index
-  # end
+  # GET /albums/1/tracks
+  # GET /albums/1/tracks.json
+  def index
+    respond_to do |format|
+      format.json { render json: @album.tracks.to_json }
+      format.xml { render xml: @album.tracks.to_xml }
+    end
+  end
 
   # # GET /albums/1/tracks/1
   # # GET /albums/1/tracks/1.json
