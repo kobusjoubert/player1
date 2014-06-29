@@ -1,5 +1,5 @@
 class ArtistsController < ApplicationController
-  before_action :set_artist, only: [:show, :edit, :update, :destroy]
+  before_action :set_artist, only: [:show, :edit, :update, :destroy, :lastfm_artist_picture]
   skip_before_action :authenticate_user!, only: [:show, :index]
 
   # GET /artists
@@ -64,6 +64,15 @@ class ArtistsController < ApplicationController
     end
   end
 
+  # GET /artists/1/lastfm_artist_picture.js
+  def lastfm_artist_picture
+    @picture_url = get_artist_picture(@artist.name)
+    
+    respond_to do |format|
+      format.js { render partial: "lastfm_artist_picture", locals: {  } }
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_artist
@@ -73,6 +82,24 @@ class ArtistsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def artist_params
       params.require(:artist).permit(:name, :about, :picture)
+    end
+
+    def get_artist_picture(artist)
+      require "net/http"
+      uri = URI.parse("http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=#{CGI.escape artist}&api_key=#{ENV["LAST_FM_API_KEY"]}&format=json")
+      response = Net::HTTP.get(uri)
+      json = JSON.parse(response)
+      return if !json["error"].blank?
+
+      result = ''
+      json_values = json.values
+
+      if json_values.count > 0
+        artist = json_values[0]
+        result = { "picture_url" => artist["image"][3]["#text"] }
+      end
+
+      result["picture_url"]
     end
 
     # Similar artists
