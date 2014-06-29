@@ -1,18 +1,18 @@
 = form_for @album, html: { multipart: true } do |f|
   = render "layouts/errors", resource: @album
-  / %h1
-  /   = image_tag @album.cover.url(:extra_large), alt: "#{@album.title}", title: "#{@album.title}", class: "img-rounded pull-center img-album-picture"
-  / .form-group
-  /   = f.label :cover
-  /   .row
-  /     .col-xs-12
-  /       .col.xs-4.pull-left
-  /         = check_box_tag "search_online"
-  /         %label{ for: "search_online" } Search online
-  /         = " - or - "
-  /       .col-xs-6
-  /         = f.file_field :cover
-  /         %p.help-block Add a cover from computer
+  %h1
+    = image_tag @album.cover.url(:extra_large), alt: "#{@album.title}", title: "#{@album.title}", class: "img-rounded pull-center img-album-picture"
+  .form-group
+    = f.label :cover
+    .row
+      .col-xs-12
+        .col.xs-4.pull-left
+          = check_box_tag "search_online"
+          %label{ for: "search_online" } Search online
+          = " - or - "
+        .col-xs-6
+          = f.file_field :cover
+          %p.help-block Add a cover from computer
   .form-group
     = f.label :title
     = f.text_field :title, class: "form-control"

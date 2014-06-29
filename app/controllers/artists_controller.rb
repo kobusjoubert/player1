@@ -31,7 +31,7 @@ class ArtistsController < ApplicationController
 
     if params[:search_online]
       picture_url = get_artist_picture(@artist.name)
-      @artist.picture_from_url(picture_url)
+      @artist.picture_from_url(picture_url) if !picture_url.blank?
     end
 
     respond_to do |format|
@@ -50,7 +50,7 @@ class ArtistsController < ApplicationController
   def update
     if params[:search_online]
       picture_url = get_artist_picture(@artist.name)
-      @artist.picture_from_url(picture_url)
+      @artist.picture_from_url(picture_url) if !picture_url.blank?
     end
 
     respond_to do |format|
@@ -98,6 +98,7 @@ class ArtistsController < ApplicationController
 
       if json_values.count > 0
         artist = json_values[0]
+        # TODO: Loop from index 3 up if empty url returned so that we can get at least one image.
         result = { "picture_url" => artist["image"][3]["#text"] }
       end
 

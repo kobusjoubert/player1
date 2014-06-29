@@ -5,8 +5,9 @@
       %tr
         %td
           = link_to album do
-            / = image_tag album.picture(:small), class: "img-rounded"
+            = image_tag album.cover(:small), class: "img-rounded"
             %strong= album.title
+            = album_artists(album)
             = album.description.truncate(30)
         - if user_signed_in?
           %td
