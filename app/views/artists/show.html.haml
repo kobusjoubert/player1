@@ -16,7 +16,7 @@
               = artist["name"].truncate(30)
       - if !params[:similar_artists] && @similar_artists.length > 5
         = link_to "More similar artitsts", artist_path + "?similar_artists=all"
-    - if @similar_artists.empty?
+    - if @similar_artists.blank?
       %p No similar artists found
 .row
   .col-sm-12

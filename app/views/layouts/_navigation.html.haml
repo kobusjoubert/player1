@@ -8,11 +8,10 @@
   = link_to "Player1", root_path, class: "navbar-brand"
 .navbar-collapse.collapse
   %ul.nav.navbar-nav
-    - if user_signed_in?
-      %li{ class: "#{active_class(artists_path)}" }
-        = link_to "Artists", artists_path
-      %li{ class: "#{active_class(albums_path)}" }
-        = link_to "Albums", albums_path
+    %li{ class: "#{active_class(artists_path)}" }
+      = link_to "Artists", artists_path
+    %li{ class: "#{active_class(albums_path)}" }
+      = link_to "Albums", albums_path
   %ul.nav.navbar-nav.navbar-right
     - if user_signed_in?
       %li{ class: "#{active_class(edit_user_registration_path)}" }

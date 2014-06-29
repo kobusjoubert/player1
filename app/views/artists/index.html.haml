@@ -14,6 +14,7 @@
                 %i.glyphicon.glyphicon-pencil
               = link_to artist, method: :delete, :data => { confirm: 'Are you sure?' }, class: "btn btn-xs btn-danger" do
                 %i.glyphicon.glyphicon-trash
-= link_to new_artist_path, class: "btn btn-primary" do
-  %i.glyphicon.glyphicon-plus
-  Artist
+- if user_signed_in?
+  = link_to new_artist_path, class: "btn btn-primary" do
+    %i.glyphicon.glyphicon-plus
+    Artist

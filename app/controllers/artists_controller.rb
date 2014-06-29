@@ -1,5 +1,6 @@
 class ArtistsController < ApplicationController
   before_action :set_artist, only: [:show, :edit, :update, :destroy]
+  skip_before_action :authenticate_user!, only: [:show, :index]
 
   # GET /artists
   # GET /artists.json
@@ -79,16 +80,16 @@ class ArtistsController < ApplicationController
       require "net/http"
 
       result = []
-      api_key = "ee548e80b1802f0a8098e75f9b804361"
-      uri = URI.parse("http://ws.audioscrobbler.com/2.0/?method=artist.getsimilar&artist=#{CGI.escape artist}&api_key=#{api_key}&format=json")
+      uri = URI.parse("http://ws.audioscrobbler.com/2.0/?method=artist.getsimilar&artist=#{CGI.escape artist}&api_key=#{LAST_FM["api_key"]}&format=json")
       response = Net::HTTP.get(uri)
       # response.code
       # response.body
+      json = JSON.parse(response)
+      redirect_to artists_path, alert: json["message"] and return if !json["error"].blank?
+      json_values = json.values
 
-      json = JSON.parse(response).values
-
-      if json.count > 0
-        artists = json[0]["artist"]
+      if json_values.count > 0
+        artists = json_values[0]["artist"]
 
         if artists.instance_of?(Array)
           artists.each do |artist|
