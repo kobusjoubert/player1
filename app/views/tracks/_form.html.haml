@@ -1,10 +1,12 @@
-= form_for [@album, @track], html: { class: "form-inline" } do |f|
+= form_for [@album, @track], html: { class: "#{track_form_class}" } do |f|
   = render "layouts/errors", resource: @track
   .form-group
     = f.label :name, class: "sr-only"
-    = f.text_field :name, class: "form-control input-sm", placeholder: "name"
+    = f.text_field :name, class: "form-control #{track_form_field_class}", placeholder: "name"
   .form-group
     = f.label :duration, class: "sr-only"
-    = f.text_field :duration, class: "form-control input-sm", placeholder: "duration (seconds)"
+    = f.text_field :duration, class: "form-control #{track_form_field_class}", placeholder: "duration (seconds)"
   .form-group.actions
-    = f.submit "Add", class: "btn btn-sm btn-primary"
+    = f.submit track_submit_text, class: "btn #{track_form_action_class} btn-primary"
+    - if controller_name == "tracks" && action_name == "edit"
+      = link_to "Back", album_path(@album), class: "btn btn-default pull-right"

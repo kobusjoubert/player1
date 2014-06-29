@@ -1,6 +1,6 @@
 class TracksController < ApplicationController
   before_action :set_track, only: [:show, :edit, :update, :destroy]
-  # before_action :set_album, only: [:destroy]
+  before_action :set_album, only: [:edit]
 
   # # GET /albums/1/tracks
   # # GET /albums/1/tracks.json
@@ -17,9 +17,9 @@ class TracksController < ApplicationController
   #   @track = Track.new
   # end
 
-  # # GET /albums/1/tracks/1/edit
-  # def edit
-  # end
+  # GET /albums/1/tracks/1/edit
+  def edit
+  end
 
   # POST /albums/1/tracks
   # POST /albums/1/tracks.json
@@ -74,7 +74,7 @@ class TracksController < ApplicationController
       params.require(:track).permit(:name, :duration, :album_id)
     end
 
-    def set_ablum
+    def set_album
       @album = Album.find(params[:album_id])
     end
 end
