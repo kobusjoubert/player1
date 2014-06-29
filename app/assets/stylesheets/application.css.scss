@@ -75,3 +75,12 @@ a:focus {
     margin-right: 5px;
   }
 }
+
+// Not sure why there is no margin on Heroku
+.table {
+  .pull-right {
+    .btn {
+      margin-left: 5px;
+    }
+  }
+}
