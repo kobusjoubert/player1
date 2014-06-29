@@ -3,18 +3,16 @@
   %h1
     = image_tag @artist.picture.url(:extra_large), alt: "#{@artist.name}", title: "#{@artist.name}", class: "img-circle pull-center img-artist-picture"
   .form-group
+    = f.label :picture
     .row
-      .col-xs-6
-        = f.label :picture
-        = f.file_field :picture
-        %p.help-block
-          Add a picture of the artist
-      = "- or -"
-      .col.xs-6
-        %p.pull-right
-          = link_to lastfm_artist_picture_artist_url, class: "btn btn-sm btn-primary", remote: true do
-            %i.glyphicon.glyphicon-search
-            Search online
+      .col-xs-12
+        .col.xs-4.pull-left
+          = check_box_tag "search_online"
+          %label{ for: "search_online" } Search online
+          = " - or - "
+        .col-xs-6
+          = f.file_field :picture
+          %p.help-block Add a picture from computer
   .form-group
     = f.label :name
     = f.text_field :name, class: "form-control"

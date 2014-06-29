@@ -1,5 +1,5 @@
 class ArtistsController < ApplicationController
-  before_action :set_artist, only: [:show, :edit, :update, :destroy, :lastfm_artist_picture]
+  before_action :set_artist, only: [:show, :edit, :update, :destroy]
   skip_before_action :authenticate_user!, only: [:show, :index]
 
   # GET /artists
@@ -29,6 +29,11 @@ class ArtistsController < ApplicationController
   def create
     @artist = Artist.new(artist_params)
 
+    if params[:search_online]
+      picture_url = get_artist_picture(@artist.name)
+      @artist.picture_from_url(picture_url)
+    end
+
     respond_to do |format|
       if @artist.save
         format.html { redirect_to @artist, notice: 'Artist was successfully created.' }
@@ -43,6 +48,11 @@ class ArtistsController < ApplicationController
   # PATCH/PUT /artists/1
   # PATCH/PUT /artists/1.json
   def update
+    if params[:search_online]
+      picture_url = get_artist_picture(@artist.name)
+      @artist.picture_from_url(picture_url)
+    end
+
     respond_to do |format|
       if @artist.update(artist_params)
         format.html { redirect_to @artist, notice: 'Artist was successfully updated.' }
@@ -58,18 +68,10 @@ class ArtistsController < ApplicationController
   # DELETE /artists/1.json
   def destroy
     @artist.destroy
+
     respond_to do |format|
       format.html { redirect_to artists_url, notice: 'Artist was successfully destroyed.' }
       format.json { head :no_content }
-    end
-  end
-
-  # GET /artists/1/lastfm_artist_picture.js
-  def lastfm_artist_picture
-    @picture_url = get_artist_picture(@artist.name)
-    
-    respond_to do |format|
-      format.js { render partial: "lastfm_artist_picture", locals: {  } }
     end
   end
 

@@ -5,11 +5,7 @@ Rails.application.routes.draw do
 
   devise_for :users, path: 'users', path_names: { sign_in: 'login', sign_out: 'logout', sign_up: 'register' }
 
-  resources :artists do
-    member do
-      get :lastfm_artist_picture
-    end
-  end
+  resources :artists
 
   resources :album_artists
 

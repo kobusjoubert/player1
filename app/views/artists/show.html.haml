@@ -22,3 +22,5 @@
   .col-sm-12
     .actions
       = link_to 'Back', artists_path, class: "btn btn-default pull-right"
+      - if user_signed_in?
+        = link_to 'Edit', edit_artist_path, class: "btn btn-primary"
