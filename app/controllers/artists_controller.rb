@@ -28,11 +28,7 @@ class ArtistsController < ApplicationController
   # POST /artists.json
   def create
     @artist = Artist.new(artist_params)
-
-    if params[:search_online]
-      picture_url = get_artist_picture(@artist.name)
-      @artist.picture_from_url(picture_url) if !picture_url.blank?
-    end
+    artist_picture if params[:search_online]
 
     respond_to do |format|
       if @artist.save
@@ -48,10 +44,7 @@ class ArtistsController < ApplicationController
   # PATCH/PUT /artists/1
   # PATCH/PUT /artists/1.json
   def update
-    if params[:search_online]
-      picture_url = get_artist_picture(@artist.name)
-      @artist.picture_from_url(picture_url) if !picture_url.blank?
-    end
+    artist_picture if params[:search_online]
 
     respond_to do |format|
       if @artist.update(artist_params)
@@ -86,6 +79,12 @@ class ArtistsController < ApplicationController
       params.require(:artist).permit(:name, :about, :picture)
     end
 
+    def artist_picture
+      picture_url = get_artist_picture(@artist.name)
+      @artist.picture_from_url(picture_url) if !picture_url.blank?
+    end
+
+    # Artist picture
     def get_artist_picture(artist)
       require "net/http"
       uri = URI.parse("http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=#{CGI.escape artist}&api_key=#{ENV["LAST_FM_API_KEY"]}&format=json")

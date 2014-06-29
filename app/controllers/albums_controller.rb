@@ -27,6 +27,11 @@ class AlbumsController < ApplicationController
   def create
     @album = Album.new(album_params)
 
+    if params[:search_online]
+      cover_url = get_album_cover(@album.title)
+      @album.cover_from_url(cover_url) if !cover_url.blank?
+    end
+
     respond_to do |format|
       if @album.save
         format.html { redirect_to @album, notice: 'Album was successfully created.' }
@@ -71,5 +76,25 @@ class AlbumsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def album_params
       params.require(:album).permit(:title, :description, :genre, :cover)
+    end
+
+    # Album cover
+    def get_album_cover(album)
+      require "net/http"
+      uri = URI.parse("http://ws.audioscrobbler.com/2.0/?method=album.getinfo&album=#{CGI.escape album.artist.first}&album=#{CGI.escape album}&api_key=#{ENV["LAST_FM_API_KEY"]}&format=json")
+      response = Net::HTTP.get(uri)
+      json = JSON.parse(response)
+      return if !json["error"].blank?
+
+      result = ''
+      json_values = json.values
+
+      if json_values.count > 0
+        album = json_values[0]
+        # TODO: Loop from index 3 up if empty url returned so that we can get at least one image.
+        result = { "picture_url" => album["image"][3]["#text"] }
+      end
+
+      result["picture_url"]
     end
 end
