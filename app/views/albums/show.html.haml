@@ -8,13 +8,6 @@
   .col-sm-12.col-md-5
     %h3 Tracks
     = render partial: "tracks/index", locals: { album: @album }
-    / - if @album.tracks
-    /   %ul.list-unstyled.list-album-tracks
-    /     - @album.tracks.each do |track|
-    /       %li{ title: "#{track.name}", class: "tooltips", data: { toggle: "tooltip" } }
-    /         = track.name.truncate(30)
-    / - if @album.tracks.blank?
-    /   %p No tracks added for this album
 .row
   .col-sm-12
     .actions

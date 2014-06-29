@@ -1,62 +1,18 @@
 %table.table.table-hover
-  %tbody
-    - album.tracks.each do |track|
-      %tr.tooltips{ title: "#{track.name}", data: { toggle: "tooltip" } }
-        %td
-          %strong= track.name.truncate(30)
-          - if track.duration
-            (#{distance_of_time_in_words(track.duration)})
-        - if user_signed_in?
+  - if album.tracks.blank?
+    %p No tracks yet
+  - if !album.tracks.blank?
+    %tbody
+      - album.tracks.each do |track|
+        %tr.tooltips{ title: "#{track.name}", data: { toggle: "tooltip" } }
           %td
-            .pull-right
-              = link_to edit_album_track_path(album, track), class: "btn btn-xs btn-default" do
-                %i.glyphicon.glyphicon-pencil
-              = link_to album_track_path(album, track), method: :delete, :data => { confirm: 'Are you sure?' }, class: "btn btn-xs btn-danger" do
-                %i.glyphicon.glyphicon-trash
-
-/ %h1 Listing tracks
-/
-/ %table
-/   %tr
-/     %th Name
-/     %th Duration
-/     %th
-/     %th
-/     %th
-/
-/   - album.tracks.each do |track|
-/     %tr
-/       %td= track.name
-/       %td= track.duration
-/       %td= link_to 'Show', track
-/       %td= link_to 'Edit', edit_track_path(track)
-/       %td= link_to 'Destroy', track, :method => :delete, :data => { :confirm => 'Are you sure?' }
-/
-/ %br
-/
-/ = link_to 'New Track', new_track_path
-
-
-/ %table.table.table-hover
-/   %tbody
-/     - @albums.each do |album|
-/       %tr
-/         %td
-/           = link_to album do
-/             = image_tag album.cover(:small), class: "img-rounded"
-/             %strong= album.title
-/             = album_artists(album)
-/             = album.description.truncate(30)
-/         - if user_signed_in?
-/           %td
-/             .pull-right
-/               = link_to edit_album_path(album), class: "btn btn-xs btn-default" do
-/                 %i.glyphicon.glyphicon-pencil
-/               = link_to album, method: :delete, :data => { confirm: 'Are you sure?' }, class: "btn btn-xs btn-danger" do
-/                 %i.glyphicon.glyphicon-trash
-/ .pull-center
-/   = paginate @albums
-/ - if user_signed_in?
-/   = link_to new_album_path, class: "btn btn-primary" do
-/     %i.glyphicon.glyphicon-plus
-/     Album
+            %strong= track.name.truncate(30)
+            - if track.duration
+              (#{distance_of_time_in_words(track.duration)})
+          - if user_signed_in?
+            %td
+              .pull-right
+                = link_to edit_album_track_path(album, track), class: "btn btn-xs btn-default" do
+                  %i.glyphicon.glyphicon-pencil
+                = link_to album_track_path(album, track), method: :delete, :data => { confirm: 'Are you sure?' }, class: "btn btn-xs btn-danger" do
+                  %i.glyphicon.glyphicon-trash
