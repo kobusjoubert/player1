@@ -1,5 +1,6 @@
 class TracksController < ApplicationController
   before_action :set_track, only: [:show, :edit, :update, :destroy]
+  before_action :set_ablum
 
   # GET /albums/1/tracks
   # GET /albums/1/tracks.json
@@ -70,5 +71,9 @@ class TracksController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def track_params
       params.require(:track).permit(:name, :duration)
+    end
+
+    def set_ablum
+      @album = Album.find(params[:album_id])
     end
 end
