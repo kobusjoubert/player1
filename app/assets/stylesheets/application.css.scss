@@ -69,3 +69,9 @@ a:focus {
 .img-artist-picture {
   cursor: pointer;
 }
+
+.index {
+  .img-circle, .img-rounded, .img-thumbnail {
+    margin-right: 5px;
+  }
+}

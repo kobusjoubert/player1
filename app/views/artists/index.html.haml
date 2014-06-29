@@ -5,6 +5,7 @@
       %tr
         %td
           = link_to artist do
+            = image_tag artist.picture(:small), class: "img-circle"
             = artist.name
             = artist.about
         - if user_signed_in?
