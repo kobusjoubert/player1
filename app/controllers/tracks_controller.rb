@@ -69,6 +69,7 @@ class TracksController < ApplicationController
     respond_to do |format|
       format.html { redirect_to album_url(@track.album), notice: 'Track was successfully destroyed.' }
       format.json { head :no_content }
+      format.xml { head :no_content }
     end
   end
 
