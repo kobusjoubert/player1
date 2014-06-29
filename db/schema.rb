@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140629150815) do
+ActiveRecord::Schema.define(version: 20140629182029) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,7 +54,10 @@ ActiveRecord::Schema.define(version: 20140629150815) do
     t.integer  "duration"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "album_id"
   end
+
+  add_index "tracks", ["album_id"], name: "index_tracks_on_album_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
