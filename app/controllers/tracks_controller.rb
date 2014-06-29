@@ -35,10 +35,12 @@ class TracksController < ApplicationController
     respond_to do |format|
       if @track.save
         format.html { redirect_to album_path(@track.album), notice: 'Track was successfully created.' }
-        format.json { render :show, status: :created, location: @track }
+        format.json { render :show, status: :created, location: album_path(@track.album) }
+        format.xml { render xml: @track, status: :created }
       else
-        format.html { render :new }
+        format.html { redirect_to album_path(@track.album), alert: 'Track was not added.' }
         format.json { render json: @track.errors, status: :unprocessable_entity }
+        format.xml { render xml: @track.errors, status: :unprocessable_entity }
       end
     end
   end
