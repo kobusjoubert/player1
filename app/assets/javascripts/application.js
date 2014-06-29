@@ -45,8 +45,9 @@ $(document).on("ready page:change", function() {
   var side = $("body.mobile").length ? "top" : "left";
   $(".tooltips").tooltip({ placement: side });
 
+  // FIXME: This doesn't actually set the value in the file field.
   // Clicking on image should trigger form file field.
-  $(".img-artist-picture").click(function() {
-    $("#artist_picture").click();
-  });
+  // $(".img-artist-picture").click(function() {
+  //   $("#artist_picture").click();
+  // });
 });
