@@ -16,9 +16,9 @@ class PublicController < ApplicationController
   # GET /search
   # GET /search.json
   def search
-    @albums = Album.where("title LIKE ? OR description LIKE ?", "%#{params[:search]}%", "%#{params[:search]}%")
-    @artists = Artist.where("name LIKE ? OR about LIKE ?", "%#{params[:search]}%", "%#{params[:search]}%")
-    @tracks = Track.where("name LIKE ?", "%#{params[:search]}%")
+    @albums = Album.where("title ILIKE ? OR description ILIKE ?", "%#{params[:search]}%", "%#{params[:search]}%")
+    @artists = Artist.where("name ILIKE ? OR about ILIKE ?", "%#{params[:search]}%", "%#{params[:search]}%")
+    @tracks = Track.where("name ILIKE ?", "%#{params[:search]}%")
     @search_combinde = {
       albums: @albums, 
       artists: @artists, 
