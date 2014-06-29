@@ -3,6 +3,3 @@ development:
 
 test:
   api_key: 
-
-procuction:
-  api_key: 

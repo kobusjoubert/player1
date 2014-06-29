@@ -3,10 +3,18 @@
   %h1
     = image_tag @artist.picture.url(:extra_large), alt: "#{@artist.name}", title: "#{@artist.name}", class: "img-circle pull-center img-artist-picture"
   .form-group
-    = f.label :picture
-    = f.file_field :picture
-    %p.help-block
-      Add a picture of the artist
+    .row
+      .col-xs-6
+        = f.label :picture
+        = f.file_field :picture
+        %p.help-block
+          Add a picture of the artist
+      = "- or -"
+      .col.xs-6
+        %p.pull-right
+          = link_to "", class: "btn btn-sm btn-primary" do
+            %i.glyphicon.glyphicon-search
+            Search online
   .form-group
     = f.label :name
     = f.text_field :name, class: "form-control"

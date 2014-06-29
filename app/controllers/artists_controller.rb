@@ -78,7 +78,7 @@ class ArtistsController < ApplicationController
     # Similar artists
     def get_similar_artists(artist)
       require "net/http"
-      uri = URI.parse("http://ws.audioscrobbler.com/2.0/?method=artist.getsimilar&artist=#{CGI.escape artist}&api_key=#{LAST_FM["api_key"]}&format=json")
+      uri = URI.parse("http://ws.audioscrobbler.com/2.0/?method=artist.getsimilar&artist=#{CGI.escape artist}&api_key=#{LAST_FM_API_KEY}&format=json")
       response = Net::HTTP.get(uri)
       # response.code
       # response.body
