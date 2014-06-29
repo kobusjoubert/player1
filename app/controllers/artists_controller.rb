@@ -64,9 +64,11 @@ class ArtistsController < ApplicationController
       if @artist.update(artist_params)
         format.html { redirect_to @artist, notice: 'Artist was successfully updated.' }
         format.json { render :show, status: :ok, location: @artist }
+        format.xml { render xml: @artist, status: :ok }
       else
         format.html { render :edit }
         format.json { render json: @artist.errors, status: :unprocessable_entity }
+        format.xml { render xml: @artist.errors, status: :unprocessable_entity }
       end
     end
   end
