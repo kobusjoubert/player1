@@ -17,4 +17,4 @@
 
 # Ignore settings
 /config/s3.yml
-#/config/last_fm.yml
+/config/last_fm.yml
