@@ -12,10 +12,6 @@ module TracksHelper
   end
 
   def track_submit_text
-     if controller_name == "albums" && action_name == "show"
-       "Add"
-     else
-       "Save"
-     end
+    controller_name == "albums" && action_name == "show" ? "Add" : "Save"
   end
 end
