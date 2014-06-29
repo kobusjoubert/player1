@@ -78,11 +78,11 @@ class AlbumsController < ApplicationController
       params.require(:album).permit(:title, :description, :genre, :cover, :artists)
     end
 
-    # There need to be at least one artist.
     def album_artists
-      artist_ids = params[:album][:artists]
+      artist_ids = params[:album][:album_artists]
       artist_ids.shift
 
+      # There need to be at least one artist.
       if artist_ids.length > 0
         # Remove all artists linked to this album first.
         album_artists = AlbumArtist.where(album_id: @album)
@@ -98,19 +98,19 @@ class AlbumsController < ApplicationController
         end
       else
         # TODO: Not sure why this isn't displaying the error.
-        @album.errors.add(:artists, "You need to select at least one artist.")
+        # @album.errors.add(:artists, "You need to select at least one artist.")
       end
     end
 
     def album_cover
-      cover_url = get_album_cover(@album.title)
+      cover_url = get_album_cover(@album)
       @album.cover_from_url(cover_url) if !cover_url.blank?
     end
 
     # Album cover
     def get_album_cover(album)
       require "net/http"
-      uri = URI.parse("http://ws.audioscrobbler.com/2.0/?method=album.getinfo&album=#{CGI.escape album.artist.first}&album=#{CGI.escape album}&api_key=#{ENV["LAST_FM_API_KEY"]}&format=json")
+      uri = URI.parse("http://ws.audioscrobbler.com/2.0/?method=album.getinfo&artist=#{CGI.escape album.artists.first.name}&album=#{CGI.escape album.title}&api_key=#{ENV["LAST_FM_API_KEY"]}&format=json")
       response = Net::HTTP.get(uri)
       json = JSON.parse(response)
       return if !json["error"].blank?
