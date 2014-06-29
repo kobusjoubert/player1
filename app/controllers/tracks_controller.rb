@@ -1,28 +1,28 @@
 class TracksController < ApplicationController
   before_action :set_track, only: [:show, :edit, :update, :destroy]
 
-  # GET /tracks
-  # GET /tracks.json
+  # GET /albums/1/tracks
+  # GET /albums/1/tracks.json
   def index
     @tracks = Track.all
   end
 
-  # GET /tracks/1
-  # GET /tracks/1.json
+  # GET /albums/1/tracks/1
+  # GET /albums/1/tracks/1.json
   def show
   end
 
-  # GET /tracks/new
+  # GET /albums/1/tracks/new
   def new
     @track = Track.new
   end
 
-  # GET /tracks/1/edit
+  # GET /albums/1/tracks/1/edit
   def edit
   end
 
-  # POST /tracks
-  # POST /tracks.json
+  # POST /albums/1/tracks
+  # POST /albums/1/tracks.json
   def create
     @track = Track.new(track_params)
 
@@ -37,8 +37,8 @@ class TracksController < ApplicationController
     end
   end
 
-  # PATCH/PUT /tracks/1
-  # PATCH/PUT /tracks/1.json
+  # PATCH/PUT /albums/1/tracks/1
+  # PATCH/PUT /albums/1/tracks/1.json
   def update
     respond_to do |format|
       if @track.update(track_params)
@@ -51,8 +51,8 @@ class TracksController < ApplicationController
     end
   end
 
-  # DELETE /tracks/1
-  # DELETE /tracks/1.json
+  # DELETE /albums/1/tracks/1
+  # DELETE /albums/1/tracks/1.json
   def destroy
     @track.destroy
     respond_to do |format|
