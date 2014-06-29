@@ -57,6 +57,7 @@ gem 'twitter-bootstrap-rails-confirm', github: 'bluerail/twitter-bootstrap-rails
 gem 'jquery-ui-rails'
 gem 'jquery-turbolinks'
 gem 'kaminari'
+gem 'nprogress-rails'
 
 # Authentication
 gem 'devise'
