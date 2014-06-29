@@ -14,7 +14,7 @@
           = f.file_field :cover
           %p.help-block Add a cover from computer
   .form-group
-    = f.label :title
+    = f.label "Title *"
     = f.text_field :title, class: "form-control"
   .form-group
     = f.label :description
@@ -23,7 +23,7 @@
   /   = f.label :genre
   /   = f.number_field :genre, class: "form-control"
   .form-group
-    = f.label :album_artists
+    = f.label "Artists *"
     = f.select :album_artists, options_from_collection_for_select(Artist.all, :id, :name, album_artist_id(@album)), {}, { class: "form-control", multiple: "multiple" }
     %p.help-block You need to select at least one artist
   .actions

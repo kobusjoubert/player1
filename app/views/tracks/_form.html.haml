@@ -2,7 +2,7 @@
   = render "layouts/errors", resource: @track
   .form-group
     = f.label :name, class: "sr-only"
-    = f.text_field :name, class: "form-control #{track_form_field_class}", placeholder: "name"
+    = f.text_field :name, class: "form-control #{track_form_field_class}", placeholder: "name *"
   .form-group
     = f.label :duration, class: "sr-only"
     = f.text_field :duration, class: "form-control #{track_form_field_class}", placeholder: "duration (seconds)"
