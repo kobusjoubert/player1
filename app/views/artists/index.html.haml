@@ -6,7 +6,7 @@
         %td
           = link_to artist do
             = image_tag artist.picture(:small), class: "img-circle"
-            = artist.name
+            %strong= artist.name.truncate(30)
             = artist.about
         - if user_signed_in?
           %td

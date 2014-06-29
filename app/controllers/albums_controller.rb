@@ -1,10 +1,11 @@
 class AlbumsController < ApplicationController
   before_action :set_album, only: [:show, :edit, :update, :destroy]
+  skip_before_action :authenticate_user!, only: [:show, :index]
 
   # GET /albums
   # GET /albums.json
   def index
-    @albums = Album.all
+    @albums = Album.page(params[:page])
   end
 
   # GET /albums/1
@@ -69,6 +70,6 @@ class AlbumsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def album_params
-      params.require(:album).permit(:title, :description, :genre)
+      params.require(:album).permit(:title, :description, :genre, :cover)
     end
 end

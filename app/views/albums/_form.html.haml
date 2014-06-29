@@ -1,19 +1,27 @@
-= form_for @album do |f|
-  - if @album.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@album.errors.count, "error")} prohibited this album from being saved:"
-      %ul
-        - @album.errors.full_messages.each do |msg|
-          %li= msg
-
-  .field
+= form_for @album, html: { multipart: true } do |f|
+  = render "layouts/errors", resource: @album
+  / %h1
+  /   = image_tag @album.cover.url(:extra_large), alt: "#{@album.title}", title: "#{@album.title}", class: "img-rounded pull-center img-album-picture"
+  / .form-group
+  /   = f.label :cover
+  /   .row
+  /     .col-xs-12
+  /       .col.xs-4.pull-left
+  /         = check_box_tag "search_online"
+  /         %label{ for: "search_online" } Search online
+  /         = " - or - "
+  /       .col-xs-6
+  /         = f.file_field :cover
+  /         %p.help-block Add a cover from computer
+  .form-group
     = f.label :title
-    = f.text_field :title
-  .field
+    = f.text_field :title, class: "form-control"
+  .form-group
     = f.label :description
-    = f.text_area :description
-  .field
-    = f.label :genre
-    = f.number_field :genre
+    = f.text_area :description, class: "form-control", rows: 4, placeholder: "Some info about the album"
+  / .form-group
+  /   = f.label :genre
+  /   = f.number_field :genre, class: "form-control"
   .actions
-    = f.submit 'Save'
+    = f.submit 'Save', class: "btn btn-primary"
+    = link_to 'Back', albums_path, class: "btn btn-default pull-right"
