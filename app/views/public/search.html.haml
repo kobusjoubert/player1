@@ -1,0 +1,32 @@
+%h3 Albums
+%table.table.table-hover
+  %tbody
+    - @albums.each do |album|
+      %tr
+        %td
+          = link_to album do
+            = image_tag album.cover(:small), class: "img-rounded"
+            %strong= album.title
+            = album_artists(album)
+            = album.description.truncate(100)
+%h3 Artists
+%table.table.table-hover
+  %tbody
+    - @artists.each do |artist|
+      %tr
+        %td
+          = link_to artist do
+            = image_tag artist.picture(:small), class: "img-circle"
+            %strong= artist.name
+            - if artist.about
+              = artist.about.truncate(100)
+%h3 Tracks
+%table.table.table-hover
+  %tbody
+    - @tracks.each do |track|
+      %tr
+        %td
+          = link_to album_path(track.album) do
+            = image_tag album.cover(:small), class: "img-rounded"
+            %strong= track.name
+            = track.duration

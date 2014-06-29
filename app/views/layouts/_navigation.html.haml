@@ -12,6 +12,10 @@
       = link_to "Artists", artists_path
     %li{ class: "#{active_class(albums_path)}" }
       = link_to "Albums", albums_path
+  = form_tag public_search_path, method: :get, class: "navbar-form navbar-left", role: "search" do  
+    .form-group
+      = text_field_tag :search, params[:search], class: "form-control"
+    = submit_tag "Search", class: "btn btn-default"
   %ul.nav.navbar-nav.navbar-right
     - if user_signed_in?
       %li{ class: "#{active_class(edit_user_registration_path)}" }

@@ -6,4 +6,12 @@ class PublicController < ApplicationController
   def index
     @albums = Album.page(params[:page]).per(10).order(created_at: :desc)
   end
+
+  # GET /search
+  # GET /search.json
+  def search
+    @albums = Album.where("title LIKE ?", params[:search])
+    @artists = Artist.where("name LIKE ?", params[:search])
+    @artists = Track.where("name LIKE ?", params[:search])
+  end
 end

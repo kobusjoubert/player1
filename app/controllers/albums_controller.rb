@@ -26,6 +26,7 @@ class AlbumsController < ApplicationController
   # POST /albums
   # POST /albums.json
   def create
+    redirect_to new_album_path, alert: "You have to select at least one artist." and return if params[:album][:album_artists].size == 1 && params[:album][:album_artists][0].empty?
     @album = Album.new(album_params)
     album_artists
     album_cover if params[:search_online]
