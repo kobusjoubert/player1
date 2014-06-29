@@ -1,5 +1,5 @@
 class Artist < ActiveRecord::Base
-  has_many :album_artists
+  has_many :album_artists, dependent: :destroy
   has_many :albums, through: :album_artists
 
   has_attached_file :picture,
