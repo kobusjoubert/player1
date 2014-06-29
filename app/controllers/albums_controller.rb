@@ -18,6 +18,12 @@ class AlbumsController < ApplicationController
   # GET /albums/1.json
   def show
     @track = Track.new if user_signed_in?
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @album.to_json }
+      format.xml { render xml: @album.to_xml }
+    end
   end
 
   # GET /albums/new
