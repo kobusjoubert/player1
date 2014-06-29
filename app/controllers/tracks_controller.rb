@@ -51,10 +51,12 @@ class TracksController < ApplicationController
     respond_to do |format|
       if @track.update(track_params)
         format.html { redirect_to album_path(@track.album), notice: 'Track was successfully updated.' }
-        format.json { render :show, status: :ok, location: @track }
+        format.json { render :show, status: :ok, location: album_path(@track.album) }
+        format.xml { render xml: @track, status: :updated }
       else
-        format.html { render :edit }
+        format.html { redirect_to album_path(@track.album), alert: 'Track was not updated.' }
         format.json { render json: @track.errors, status: :unprocessable_entity }
+        format.xml { render xml: @track.errors, status: :unprocessable_entity }
       end
     end
   end
