@@ -11,7 +11,6 @@ Rails.application.routes.draw do
 
   resources :albums do
     resources :tracks
-    # resources :tracks, only: [:edit, :create, :update, :destroy]
   end
 
   # The priority is based upon order of creation: first created -> highest priority.
