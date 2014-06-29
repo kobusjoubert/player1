@@ -6,6 +6,12 @@ class AlbumsController < ApplicationController
   # GET /albums.json
   def index
     @albums = Album.page(params[:page])
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @albums.to_json }
+      format.xml { render xml: @albums.to_xml }
+    end
   end
 
   # GET /albums/1
