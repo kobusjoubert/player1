@@ -97,7 +97,7 @@ class ArtistsController < ApplicationController
     end
 
     def artist_picture
-      picture_url = get_artist_picture(@artist.name)
+      picture_url = get_artist_picture(params[:artist][:name])
       @artist.picture_from_url(picture_url) if !picture_url.blank?
     end
 
