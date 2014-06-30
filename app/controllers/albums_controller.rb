@@ -123,6 +123,7 @@ class AlbumsController < ApplicationController
     end
 
     def album_cover
+      # cover_url = get_album_cover(params[:album][:title]) FIXME: @album.title is not set at this time on the edit action, but we need to send the album object.
       cover_url = get_album_cover(@album)
       @album.cover_from_url(cover_url) if !cover_url.blank?
     end
